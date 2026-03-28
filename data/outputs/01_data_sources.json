@@ -1,0 +1,34 @@
+{
+  "doge_contracts_total": 13440,
+  "doge_contracts_single_piid": 13407,
+  "doge_contracts_aggregate_piid": 33,
+  "doge_grants_total": 15887,
+  "doge_payments_total_per_api": 107497,
+  "usa_match_rate_pct": 45.7,
+  "usa_matched_as_contract": 46,
+  "usa_matched_as_idv": 7,
+  "usa_unmatched": 63,
+  "three_number_record": {
+    "ceiling_to_obligated_gap_median_usd": 3834417.63,
+    "ceiling_to_obligated_gap_pct_median": 46.7,
+    "savings_exceeds_obligation_count": 15,
+    "outlay_coverage_pct": 90.6
+  },
+  "grant_linkage": {
+    "link_destinations": {
+      "usaspending": 12377,
+      "no_host": 3510
+    },
+    "usaspending_links": 12377,
+    "award_id_extractable": 12377,
+    "direct_lookup_tested": 10,
+    "direct_lookup_success": 10
+  },
+  "join_strategy": {
+    "contracts_pass1": "PIID lookup with award_type_codes A,B,C,D",
+    "contracts_pass2": "unmatched PIIDs with IDV_A..IDV_E types",
+    "idv_obligations": "GET /api/v2/idvs/amounts/{generated_internal_id}/ \u2192 child_award_total_obligation",
+    "grants": "extract generated_unique_award_id from link field \u2192 GET /api/v2/awards/{id}/",
+    "grants_fallback": "USASpending bulk Assistance_PrimeTransactions + local join"
+  }
+}

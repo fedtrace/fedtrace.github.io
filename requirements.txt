@@ -1,0 +1,6 @@
+# Data fetching / analysis
+requests>=2.32
+pandas>=2.2
+numpy>=2.2
+tqdm>=4.67
+python-dotenv>=1.0

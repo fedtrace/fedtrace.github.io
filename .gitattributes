@@ -1,0 +1,8 @@
+# Normalize line endings
+* text=auto
+
+# Notebook diffs
+*.ipynb diff=jupyternotebook
+
+# LFS — only for genuinely large binaries (models, large datasets)
+# data/outputs/*.json are small summaries — tracked normally
