@@ -9,6 +9,7 @@ A methodology, not a watchdog. The record applies equally to any administration,
 | # | Notebook | Run |
 |---|----------|-----|
 | 01 | Reconstruct the financial record for cancelled federal awards — ceiling, obligated, outlays across public data sources | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fedtrace/fedtrace.github.io/blob/main/notebooks/01_data_sources.ipynb) |
+| 02 | Full-scale fetch — pull raw API responses for all 13,440 contracts and 15,887 grants into resumable JSONL checkpoints | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fedtrace/fedtrace.github.io/blob/main/notebooks/02_fetch.ipynb) |
 
 ## Setup
 

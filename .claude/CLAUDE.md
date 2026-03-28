@@ -54,9 +54,9 @@ These are not interchangeable. An accountability record without all three is inc
 
 **IDV/task-order hierarchy:** A DOGE `piid` may resolve to an IDV (Indefinite Delivery Vehicle) record in USASpending with $0 in obligations. All actual spending flows through child task orders under that IDV, each with their own PIID. To reconstruct "was money actually flowing?", aggregate child task order obligations by `parent_award_id = IDV PIID`. Reading the IDV record's value fields alone is wrong.
 
-**On DOGE specifically:** DOGE `savings` = ceiling minus current obligations. Unexercised headroom, not recovered money. ~40% of cancelled contracts were expected to produce zero actual savings (NPR/Federal News Network, Feb 2025). Termination costs owed for work-in-progress are not netted. These are sourced findings, not accusations.
+**On DOGE specifically:** DOGE `savings` = ceiling minus current obligations. Unexercised headroom, not recovered money. Termination costs owed for work-in-progress are not netted.
 
-Sources: GovWin IQ/Deltek, Bank of America Securities (Apr 2025), NPR data team, Federal News Network, FPDS Data Dictionary V1.5, GovTribe contract hierarchy documentation.
+Sources: FPDS Data Dictionary V1.5 (field definitions); GovTribe contract hierarchy documentation (IDV/task-order structure).
 
 ## Methodology Constraints — Confirmed
 
@@ -66,9 +66,9 @@ These limit what the tool can claim. State them in any output that touches these
 
 **Audit coverage is structurally uneven.** Social service grants go through Single Audits (high finding rate by design). Defense contracts go through DCAA audits with different criteria and thresholds. A cross-reference that uses audit findings as a "prior waste" signal will systematically over-flag social programs and under-flag defense programs — not because of actual waste differences, but because of audit coverage differences. State this limitation whenever audit findings are used.
 
-**DOGE's selection logic was ideological, not evidence-based.** GAO's High Risk List (2025) does not overlap with primary DOGE targets. GAO flags DoD acquisition, Medicare/Medicaid, federal IT — programs DOGE largely left alone. DOGE targeted USAID, CFPB, and DEI-adjacent programs — none on the GAO list. A cross-reference between cancellations and audit records will mostly show cancelled programs with clean records. This is a finding about DOGE's methodology, not evidence that the cuts were wrong or right.
+**GAO's High Risk List (2025) does not overlap with primary DOGE targets.** GAO flags DoD acquisition, Medicare/Medicaid, and federal IT. DOGE primarily targeted USAID, CFPB, and programs at USDA, HHS, and State — none on the GAO list. A cross-reference between cancellations and audit records will mostly show cancelled programs with clean audit records. The non-overlap is a finding about the relationship between the two lists, not evidence that the cuts were wrong or right.
 
-**USASpending data quality is limited.** POGO found less than 7% of USASpending data fully accurate (2019). GAO found $619B in spending absent from the transparency site. Data quality degrades specifically at USAID, USDA, DHS, and Labor — the agencies with the most DOGE activity. Any analysis must acknowledge these gaps rather than treat USASpending as ground truth.
+**USASpending data quality is limited.** The empirical confirmation is in notebook 01: in a stratified sample, agencies with known data quality issues (Agriculture, DHS, GSA, VA, Justice, Interior, OPM) returned 0% match rates. Any analysis must acknowledge these gaps rather than treat USASpending as ground truth. Do not cite unverified external accuracy estimates as findings.
 
 **USASpending PIID match gap is structural, not a join methodology issue.** Empirically confirmed (notebook 01, stratified sample of 116 contracts): Agriculture 10/0 matched, DHS 8/0, GSA 8/0, VA 6/0, Justice 4/0, Interior 4/0, OPM 3/0. These are agencies with known data quality gaps. DoD resolves selectively (2 unmatched / 9 matched). The ~45–54% unmatched rate in a stratified sample is not fixable by improving the join — it reflects absent source data. State this when reporting match coverage.
 
