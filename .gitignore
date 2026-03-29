@@ -14,8 +14,9 @@ build/
 .env
 *.env
 
-# Data — raw API responses stay local (too large for git; JSONL checkpoints live in Colab)
-data/raw/
+# Data — large raw files (bulk downloads, temp scratch)
+data/raw/*.csv
+data/raw/*.zip
 
 # OS
 .DS_Store
