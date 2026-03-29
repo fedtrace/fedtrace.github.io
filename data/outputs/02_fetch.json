@@ -1,0 +1,22 @@
+{
+  "contracts": {
+    "total_single_piid": 9634,
+    "matched": 9512,
+    "matched_pct": 98.7,
+    "matched_as_contract": 9397,
+    "matched_as_idv": 115,
+    "unmatched": 2810,
+    "idv_amounts_fetched": 115
+  },
+  "grants": {
+    "directly_linked": 12377,
+    "fetched": 12360,
+    "fetched_pct": 99.9
+  },
+  "raw_files": [
+    "data/raw/02_contracts_matched.jsonl",
+    "data/raw/02_contracts_unmatched.jsonl",
+    "data/raw/02_idv_amounts.jsonl",
+    "data/raw/02_grants.jsonl"
+  ]
+}
