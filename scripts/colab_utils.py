@@ -70,9 +70,10 @@ def prepare_notebook(
                 subprocess.run(["git", "fetch", "--unshallow", "origin", "main"], check=True, cwd=repo_path)
 
         try:
-            subprocess.run(["git", "pull", "origin", "main"], check=True, cwd=repo_path)
+            subprocess.run(["git", "fetch", "origin", "main"], check=True, cwd=repo_path)
+            subprocess.run(["git", "reset", "--hard", "FETCH_HEAD"], check=True, cwd=repo_path)
         except subprocess.CalledProcessError:
-            print("Warning: git pull failed — continuing with local repo state.")
+            print("Warning: git sync failed — continuing with local repo state.")
 
     return repo_path, get_repo_paths(repo_path)
 
@@ -149,13 +150,14 @@ def publish_artifacts(
     if (repo_path / ".git" / "shallow").exists():
         subprocess.run(["git", "fetch", "--unshallow", "origin", "main"], check=True, cwd=repo_path)
 
+    # Sync to origin before committing. fetch + reset handles rewritten history
+    # (e.g. after a force push) as well as normal fast-forwards. Untracked files
+    # and gitignored files are not affected by reset --hard.
     try:
-        subprocess.run(["git", "pull", "--ff-only", "origin", "main"], check=True, cwd=repo_path)
+        subprocess.run(["git", "fetch", "origin", "main"], check=True, cwd=repo_path)
+        subprocess.run(["git", "reset", "--hard", "FETCH_HEAD"], check=True, cwd=repo_path)
     except subprocess.CalledProcessError as exc:
-        raise RuntimeError(
-            "git pull --ff-only failed before publishing — remote has diverged. "
-            "Re-run prepare_notebook(pull_latest=True) and retry."
-        ) from exc
+        raise RuntimeError("git sync to origin failed before publishing.") from exc
 
     subprocess.run(["git", "add", "--", *rel_paths], check=True, cwd=repo_path)
 
