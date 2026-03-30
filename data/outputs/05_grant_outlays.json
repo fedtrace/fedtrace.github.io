@@ -1,0 +1,44 @@
+{
+  "source_notebooks": [
+    "02_fetch"
+  ],
+  "grants": {
+    "total_assembled": 12361,
+    "all_three_numbers": 8389,
+    "all_three_numbers_pct": 67.9,
+    "ceiling_gap": {
+      "n": 12361,
+      "median_gap_pct": 0.0,
+      "mean_gap_pct": 17.2,
+      "pct_gt_50": 15.0
+    },
+    "outlay_rate": {
+      "n": 8355,
+      "median_outlay_rate": 0.646,
+      "mean_outlay_rate": 0.634,
+      "pct_gt_80pct_disbursed": 37.4
+    },
+    "aggregate": {
+      "total_ceiling": 54177633113.0,
+      "total_obligated": 35743476667.0,
+      "total_outlays": 23484487826.0
+    }
+  },
+  "outlay_source": {
+    "method": "bulk_download_archive",
+    "files": "files.usaspending.gov/award_data_archive \u2014 FY(All) delta + FY2026..2020 full",
+    "columns": {
+      "fain": "award_id_fain",
+      "outlays": "total_outlayed_amount_for_overall_award",
+      "obligation": "total_obligated_amount"
+    },
+    "strategy": "stream-parsed annual archive files in chunks, max() per FAIN (cumulative fields)"
+  },
+  "methodology_notes": [
+    "ceiling = DOGE value field",
+    "obligated = USASpending total_obligation from /api/v2/awards/{id}/",
+    "outlays = total_outlayed_amount_for_overall_award from Assistance_PrimeTransactions archive files, max per FAIN (cumulative field)",
+    "FAIN extracted from generated_unique_award_id: ASST_{TYPE}_{FAIN}_{AGENCY_CODE}",
+    "grant coverage limited to ~78% of DOGE grants with a direct USASpending link"
+  ]
+}
