@@ -58,7 +58,7 @@ These are not interchangeable. An accountability record without all three is inc
 
 **Three-number record — at-scale findings (notebook 03).** Across 9,512 matched contracts: ceiling $100.6B / obligated $36.8B / outlays $19.9B. Three-number completeness (all three present): 89.4%. Ceiling-to-obligation gap: contracts median 42.5%, IDVs median 91.9% — IDV pattern confirmed at scale. Near-zero obligation (<1% of ceiling) at cancellation: 11.6% of contracts (1,105 records). DOGE-reported savings total $33.1B; ceiling-minus-obligation gap computes to $63.7B — the discrepancy is under investigation (likely: obligations changed between DOGE publication and USASpending fetch, or DOGE `value` field differs from FPDS ceiling in some records). Negative mean gap (contracts: -403.7%, IDVs: -167.7%) indicates a subset of records where obligated > ceiling — driven by contract modifications that added obligations beyond the original award value; these are not excluded from aggregates but should be flagged in any per-award output.
 
-**Grant outlays not returned by USASpending award endpoint.** The `/api/v2/awards/{id}/` endpoint returns `total_outlays: null` for assistance awards. Across 12,361 matched grants: ceiling $54.2B / obligated $35.7B / outlays: not available. Grant outlay data requires an alternative source (e.g., Treasury DATA Act bulk files or USASpending assistance outlay endpoint). Three-number completeness for grants: 0% until resolved.
+**Grant outlays not returned by USASpending award endpoint.** The `/api/v2/awards/{id}/` endpoint returns `total_outlays: null` for assistance awards. Confirmed: the field exists in the response but the value is genuinely null — not a field name mismatch. Across 12,361 matched grants: ceiling $54.2B / obligated $35.7B / outlays: not available. Two candidate paths: (1) `/api/v2/awards/funding/{award_id}/` returns federal account-level funding breakdowns including `gross_outlay_amount` — award_id already present in grants JSONL, so this is testable without re-fetch; (2) USASpending bulk download (Assistance_PrimeTransactions) contains transaction-level outlay data but requires a local join. Three-number completeness for grants: 0% until resolved.
 
 Sources: FPDS Data Dictionary V1.5 (field definitions); GovTribe contract hierarchy documentation (IDV/task-order structure).
 
@@ -104,7 +104,7 @@ The notebook is the investigation. The driving questions are the compass. The pu
 
 **Data pipeline — unresolved:**
 - Grant linkage for 22% with no `link` host (3,510 records) — identify alternative path (USASpending bulk `Assistance_PrimeTransactions` join, SAM.gov, or document as unresolvable gap)
-- Grant outlay data — `total_outlays` is null for all assistance awards from `/api/v2/awards/{id}/`. Investigate Treasury DATA Act bulk files or USASpending assistance outlay endpoint for alternative
+- Grant outlay data — `total_outlays` is null for all assistance awards from `/api/v2/awards/{id}/` (confirmed: field exists, value is genuinely null). Candidate path: `POST /api/v2/awards/funding/` returns per-federal-account rows with `gross_outlay_amount`; summing these rows yields award-level outlays. Notebook 04 probes and fetches this. Fallback if endpoint is also null: USASpending bulk download `Assistance_PrimeTransactions`.
 - Contracts where obligated > ceiling (negative ceiling gap) — identify count and cause; likely contract modifications; flag in per-award output
 
 **Architecture:**
