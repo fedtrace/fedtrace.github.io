@@ -1,0 +1,63 @@
+{
+  "source_notebooks": [
+    "02_fetch"
+  ],
+  "contracts": {
+    "total_assembled": 9512,
+    "all_three_numbers": 8508,
+    "all_three_numbers_pct": 89.4,
+    "near_zero_obligation": 1105,
+    "near_zero_obligation_pct": 11.6,
+    "ceiling_gap_by_type": {
+      "contract": {
+        "count": 9397,
+        "median_gap_pct": 42.5,
+        "mean_gap_pct": -403.7,
+        "pct_gt_50": 45.9
+      },
+      "idv": {
+        "count": 115,
+        "median_gap_pct": 91.9,
+        "mean_gap_pct": -167.7,
+        "pct_gt_50": 80.9
+      }
+    },
+    "aggregate": {
+      "total_ceiling": 100556324772.0,
+      "total_obligated": 36828604176.0,
+      "total_outlays": 19888447235.0
+    }
+  },
+  "grants": {
+    "total_assembled": 12361,
+    "all_three_numbers": 0,
+    "all_three_numbers_pct": 0.0,
+    "aggregate": {
+      "total_ceiling": 54177633113.0,
+      "total_obligated": 35743476667.0,
+      "total_outlays": null
+    }
+  },
+  "all_awards": {
+    "aggregate": {
+      "total_ceiling": 154733957885.0,
+      "total_obligated": 72572080843.0,
+      "total_outlays": 19888447235.0
+    }
+  },
+  "doge_savings_vs_gap": {
+    "n": 9512,
+    "median_doge_savings": 27171.0,
+    "median_actual_gap": 129848.0,
+    "total_doge_savings": 33081679730.0,
+    "total_actual_gap": 63727720596.0
+  },
+  "methodology_notes": [
+    "ceiling = DOGE value field (contractual maximum including unexercised options)",
+    "obligated = USASpending Award Amount (contracts) or child_award_total_obligation (IDVs)",
+    "outlays = USASpending Total Outlays (contracts) or child_award_total_outlay (IDVs)",
+    "DOGE savings = ceiling minus current obligations; unexercised headroom, not recovered funds",
+    "IDV obligation fields at the top-level award record are $0 by design; child task order totals used",
+    "Grant linkage covers only the 78% of DOGE grants with a direct USASpending link"
+  ]
+}
