@@ -104,7 +104,7 @@ The notebook is the investigation. The driving questions are the compass. The pu
 
 **Data pipeline — unresolved:**
 - Grant linkage for 22% with no `link` host (3,510 records) — identify alternative path (USASpending bulk `Assistance_PrimeTransactions` join, SAM.gov, or document as unresolvable gap)
-- Grant outlay data — `total_outlays` is null for all assistance awards from `/api/v2/awards/{id}/` (confirmed: field exists, value is genuinely null). Candidate path: `POST /api/v2/awards/funding/` returns per-federal-account rows with `gross_outlay_amount`; summing these rows yields award-level outlays. Notebook 04 probes and fetches this. Fallback if endpoint is also null: USASpending bulk download `Assistance_PrimeTransactions`.
+- Grant outlay data — two endpoints confirmed dead ends: (1) `/api/v2/awards/{id}/` returns `total_outlays: null` for all assistance awards; (2) `/api/v2/awards/funding/` returns HTTP 200 with zero result rows for all sampled grants (endpoint does not index assistance awards). Notebook 04 Section 3 tests the remaining candidate: `POST /api/v2/search/spending_by_award/` with FAINs extracted from `generated_unique_award_id` and assistance type codes `['02'..'11']` — same mechanism that returns `Total Outlays` for contracts. Fallback if this is also null: USASpending bulk download `Assistance_PrimeTransactions`.
 - Contracts where obligated > ceiling (negative ceiling gap) — identify count and cause; likely contract modifications; flag in per-award output
 
 **Architecture:**
