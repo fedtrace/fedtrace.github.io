@@ -13,6 +13,7 @@ A methodology, not a watchdog. The record applies equally to any administration,
 | 03 | Assemble the three-number record — join IDV child amounts, compute ceiling / obligated / outlays for every matched award | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fedtrace/fedtrace.github.io/blob/main/notebooks/03_assembly.ipynb) |
 | 04 | Grant outlays investigation — probe three USASpending API endpoints; all confirmed dead ends for cancelled assistance awards | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fedtrace/fedtrace.github.io/blob/main/notebooks/04_grant_outlays.ipynb) |
 | 05 | Grant outlays via bulk download — stream-parse `Assistance_PrimeTransactions` files, filter to matched FAINs, assemble grant three-number record | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fedtrace/fedtrace.github.io/blob/main/notebooks/05_grant_outlays_bulk.ipynb) |
+| 06 | Combined accountability record — unified per-award schema joining contracts and grants; ceiling / obligated / outlays across all 21,873 cancelled awards | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fedtrace/fedtrace.github.io/blob/main/notebooks/06_combined.ipynb) |
 
 ## Setup
 
